@@ -1,0 +1,31 @@
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: iniciar flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: 'stable' 
+
+    - name: dependencias
+      run: flutter pub get
+
+    - name: analisar codigo
+      run: flutter analyze
+
+    - name: crear APK
+      run: flutter build apk
