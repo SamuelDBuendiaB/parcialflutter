@@ -127,6 +127,7 @@ class _MainActivityState extends State<principal> {
                 });
                 showPopupMenu(context);
               },
+              // animacion
               child: Transform.rotate(
                 angle: _buttonPressed ? -0.3 : 0.0,
                 child: Container(
@@ -148,7 +149,7 @@ class _MainActivityState extends State<principal> {
       ),
     );
   }
-
+//informacion en lista de firebase
   Widget buildListItem(ItemData item) {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
@@ -209,7 +210,7 @@ class _MainActivityState extends State<principal> {
       ),
     );
   }
-
+//salir sesion
   void signout(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signOut(); //salir
@@ -227,7 +228,7 @@ class _MainActivityState extends State<principal> {
       );
     }
   }
-
+// menu para subir imagenes
 void showPopupMenu(BuildContext context) {
   final RenderBox button = context.findRenderObject() as RenderBox;
 
@@ -236,7 +237,7 @@ void showPopupMenu(BuildContext context) {
   final RelativeRect positionPopup =
       RelativeRect.fromLTRB(position.dx, position.dy + button.size.height,
           position.dx + button.size.width, position.dy + button.size.height + 10.0);
-
+// mostrar menu
   showMenu<String>(
     context: context,
     position: positionPopup,

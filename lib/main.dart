@@ -5,8 +5,8 @@ import 'signin.dart';
 import 'principal.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensure Flutter binding is initialized
-  await Firebase.initializeApp(); // Initialize Firebase
+  WidgetsFlutterBinding.ensureInitialized(); 
+  await Firebase.initializeApp(); // Iniciar Firebase
   runApp(MyApp());
 }
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+//verificar sesion iniciada
 class AuthChecker extends StatelessWidget {
   @override
   Widget build(BuildContext context){
@@ -40,10 +40,10 @@ class AuthChecker extends StatelessWidget {
         }
       }
     },
-    );//stream builder
-  }// build
+    );
+  }
 }
-
+// union
 class RegisUsuario extends StatelessWidget {
   final TextEditingController emailContro = TextEditingController();
   final TextEditingController passwordContro = TextEditingController();

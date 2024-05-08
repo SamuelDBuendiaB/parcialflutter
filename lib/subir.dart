@@ -14,7 +14,7 @@ class _SubirState extends State<Subir> {
   late TextEditingController _titleController;
   late TextEditingController _descriptionController;
   late XFile? _imageFile;
-
+// iniciar instancia para firebase storage
   @override
   void initState() {
     super.initState();
@@ -28,7 +28,7 @@ class _SubirState extends State<Subir> {
     _descriptionController.dispose();
     super.dispose();
   }
-
+// seleccionar imagen
   Future<void> _getImage() async {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
@@ -37,7 +37,7 @@ class _SubirState extends State<Subir> {
       _imageFile = pickedImage;
     });
   }
-
+// dar parametros a la imagen titulo y descipcion
 Future<void> _upload() async {
   if (_imageFile == null) {
     return;
@@ -49,33 +49,33 @@ Future<void> _upload() async {
   if (title.isEmpty || description.isEmpty) {
     return;
   }
-
+// try and catch para subir imagenes a la coleccion dada
   try {
     final storageRef = firebase_storage.FirebaseStorage.instance.ref().child('images/${DateTime.now().millisecondsSinceEpoch}');
     await storageRef.putFile(File(_imageFile!.path));
     final imageUrl = await storageRef.getDownloadURL();
 
-    // Add image details to Firestore
+    // detalles de imagenes
     await FirebaseFirestore.instance.collection('images').add({
       'img': imageUrl,
       'title': title,
       'description': description,
-      // You can add more fields here if needed
+
     });
 
-    // Show success message
+    // mensaje exitoso
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Image uploaded successfully')));
 
-    // Navigate to Principal screen
+    // manda a la pantalla principal
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => principal()));
   } catch (e) {
     print('Error uploading image: $e');
-    // Show error message
+    // mensaje de error
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Error uploading image')));
   }
 }
 
-
+// estilo de la pagina
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
